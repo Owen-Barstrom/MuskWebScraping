@@ -6,7 +6,23 @@
 <body>
 
 <h1>My First Heading</h1>
-<p>My first paragraph.</p>
+<p id="price"> My first paragraph.</p>
 
+<script>
+ fetch("dataTrends.json")
+  .then(response => {
+   if (!response.ok) {
+    throw new Error("Failed to load data");
+        }
+   return response.json();
+  }}
+   .then(data => {
+        // Update the page with the data
+        document.getElementById("price").textContent = data.todayPriceChange
+      })
+      .catch(error => {
+        document.getElementById("price").textContent = "Failed to load data.";
+      });
+ </script>
 </body>
 </html> 
