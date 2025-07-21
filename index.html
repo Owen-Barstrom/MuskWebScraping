@@ -18,7 +18,7 @@
   }}
    .then(data => {
         // Update the page with the data
-        document.getElementById("price").textContent = data.todayPriceChange
+        document.getElementById("price").textContent = data.todayPriceChange;
       })
       .catch(error => {
         document.getElementById("price").textContent = "Failed to load data.";
