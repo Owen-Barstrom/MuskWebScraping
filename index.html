@@ -16,7 +16,7 @@
         }
    return response.json();
   })
-   .then(dataTrends => {
+   .then(data => {
         // Update the page with the data
     document.getElementById("price").textContent = data.todayPriceChange;
     })
