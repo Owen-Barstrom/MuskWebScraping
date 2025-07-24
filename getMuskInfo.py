@@ -2,11 +2,14 @@ import json
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import time
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 
 def getTweets(page):
     ready = ""
-    driver = webdriver.Firefox()
+    settings = Options()
+    settings.headless = True
+    driver = webdriver.Firefox(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -17,8 +20,8 @@ def getTweets(page):
 #runs sentiment analysis on the tweets. Takes the json data, then updates it with
 #the average daily and overall sentiments, and the most negative and positive tweets of the day
 def sendTweetData(tweets):
-    low = 0
-    high = 0
+    low = 1
+    high = -1
     total = 0
     anal = SentimentIntensityAnalyzer()
     tweetData = {}
@@ -29,26 +32,24 @@ def sendTweetData(tweets):
         total += comp
         #checks if the tweet's score is highest or lowest of day
         if comp < low:
-            data = {
+            tweetData['low'] = {
                 'post': tweet.text,
                 'neg': score['neg'],
                 'pos': score['pos'],
                 'neu': score['neu'],
                 'comp': comp
             }
-            tweetData['low'] = data
-            low = score['compound']
+            low = comp
         
         if comp > high:
-            data = {
+            tweetData['high'] = {
                 'post': tweet.text,
                 'neg': score['neg'],
                 'pos': score['pos'],
                 'neu': score['neu'],
                 'comp': comp
             }
-            tweetData['high'] = data
-            high = score['compound']
+            high = comp
         count += 1
     
     trend = open('dataTrends.json')    
@@ -65,7 +66,9 @@ def sendTweetData(tweets):
 
 def getPrice(page):
     ready = ""
-    driver = webdriver.Firefox()
+    settings = Options()
+    settings.headless = True
+    driver = webdriver.Firefox(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -79,7 +82,7 @@ def sendPriceData(price):
     data = json.load(trend)
     data['totalPriceChange'] = data['totalPriceChange'] + price
     data['todayPriceChange'] = price
-    with open('dataTrends.json', "w") as f:     
+    with open('dataTrends.json', "w") as f:
         json.dump(data, f, indent = 6)
 
 tweets = getTweets("https://xcancel.com/elonmusk")
