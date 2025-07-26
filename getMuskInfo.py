@@ -9,6 +9,7 @@ def getTweets(page):
     ready = ""
     settings = Options()
     settings.headless = True
+    settings.binary = '/usr/bin/firefox'
     driver = webdriver.Firefox(options=settings)
     driver.get(page)
     while ready != "complete":
