@@ -47,6 +47,12 @@ jobs:
           chmod +x geckodriver
           sudo mv geckodriver /usr/local/bin/
       
+      - name: Check paths and versions
+        run: |
+          which firefox
+          firefox --version
+          which geckodriver
+          geckodriver --version
       - name: Scrape Data
         run: python getMuskInfo.py
       
