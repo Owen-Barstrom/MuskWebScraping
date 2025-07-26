@@ -10,7 +10,7 @@ def getTweets(page):
     settings = Options()
     settings.headless = True
     settings.binary_location = '/snap/bin/firefox'
-    driver = webdriver.Firefox(options=settings, executable_path="/snap/bin/geckodriver")
+    driver = webdriver.Firefox(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -70,7 +70,7 @@ def getPrice(page):
     settings = Options()
     settings.headless = True
     settings.binary_location = '/snap/bin/firefox'
-    driver = webdriver.Firefox(options=settings, executable_path="/snap/bin/geckodriver")
+    driver = webdriver.Firefox(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
