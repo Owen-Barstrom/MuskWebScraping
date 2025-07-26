@@ -9,8 +9,8 @@ def getTweets(page):
     ready = ""
     settings = Options()
     settings.headless = True
-    settings.binary = '/usr/bin/firefox'
-    driver = webdriver.Firefox(options=settings)
+    settings.binary_location = '/snap/bin/firefox'
+    driver = webdriver.Firefox(options=settings, executable_path="/snap/bin/geckodriver")
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -69,13 +69,15 @@ def getPrice(page):
     ready = ""
     settings = Options()
     settings.headless = True
-    driver = webdriver.Firefox(options=settings)
+    settings.binary_location = '/snap/bin/firefox'
+    driver = webdriver.Firefox(options=settings, executable_path="/snap/bin/geckodriver")
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
         ready = driver.execute_script("return document.readyState")
     price = driver.find_element(By.XPATH, "/html/body/div[2]/main/section/section/section/article/section[1]/div[2]/div[1]/section/div/section/div[1]/div[3]/span")
     price = float(price.text.strip("+, (, ), %"))
+    print(price)
     return price
 
 def sendPriceData(price):
@@ -83,6 +85,7 @@ def sendPriceData(price):
     data = json.load(trend)
     data['totalPriceChange'] = data['totalPriceChange'] + price
     data['todayPriceChange'] = price
+    print(data['todayPriceChange'])
     with open('dataTrends.json', "w") as f:
         json.dump(data, f, indent = 6)
 
