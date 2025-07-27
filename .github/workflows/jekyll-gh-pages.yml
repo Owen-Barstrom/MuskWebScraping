@@ -38,21 +38,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install vaderSentiment selenium 
       
-      - name: Install Firefox and geckodriver
+      - name: Install Chrome and chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox
-          wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.36.0-linux64.tar.gz  
-          tar -xvzf geckodriver-v0.36.0-linux64.tar.gz
-          chmod +x geckodriver
-          sudo mv geckodriver /usr/local/bin/
+          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y chromium-chromedriver
+          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
       
       - name: Check paths and versions
         run: |
-          which firefox
-          firefox --version
-          which geckodriver
-          geckodriver --version
+          which chrome
+          chrome --version
+          which chromedriver
+          chromedriver --version
+          
       - name: Scrape Data
         run: python getMuskInfo.py
       
