@@ -45,7 +45,9 @@ jobs:
           sudo apt-get install -y chromium-chromedriver
           sudo chmod +x /usr/bin/google-chrome
           sudo chmod +x /usr/bin/chromedriver
-      
+          sudo rm -f /etc/alternatives/google-chrome
+          sudo ln -sf /usr/lib/chromium-browser/chrome /usr/bin/google-chrome
+          
       - name: Check paths, versions, and permissions
         run: |
           which google-chrome
