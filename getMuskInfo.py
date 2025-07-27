@@ -12,6 +12,7 @@ def getTweets(page):
     settings.headless = True
     #settings.binary_location = '/snap/bin/firefox'
     #service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    settings.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=settings)
     driver.get(page)
     while ready != "complete":
@@ -73,6 +74,7 @@ def getPrice(page):
     settings.headless = True
     #settings.binary_location = '/snap/bin/firefox'
     #service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    settings.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=settings)
     driver.get(page)
     while ready != "complete":
