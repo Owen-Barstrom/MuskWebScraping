@@ -3,7 +3,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.firefox.service import Service as FirefoxService
+#from selenium.webdriver.chrome.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
 
 def getTweets(page):
@@ -11,10 +11,9 @@ def getTweets(page):
     settings = Options()
     settings.headless = True
     #settings.binary_location = '/snap/bin/firefox'
-    #service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    service = webdriver.ChromeService(executable_path='/usr/bin/chromedriver')
     settings.add_argument("--no-sandbox")
-    settings.binary_location = 'etc/alternatives/google-chrome'
-    driver = webdriver.Chrome(options=settings)
+    driver = webdriver.Chrome(options=settings, service=service)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
