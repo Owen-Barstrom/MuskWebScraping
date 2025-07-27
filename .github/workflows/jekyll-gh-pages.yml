@@ -46,12 +46,14 @@ jobs:
           sudo chmod +x /usr/bin/google-chrome
           sudo chmod +x /usr/bin/chromedriver
       
-      - name: Check paths and versions
+      - name: Check paths, versions, and permissions
         run: |
           which google-chrome
           google-chrome --version
           which chromedriver
           chromedriver --version
+          ls -l /usr/bin/google-chrome
+          ls -l /usr/bin/chromedriver
           
       - name: Scrape Data
         run: python getMuskInfo.py
