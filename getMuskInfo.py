@@ -3,6 +3,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import time
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
 
 def getTweets(page):
@@ -10,7 +11,8 @@ def getTweets(page):
     settings = Options()
     settings.headless = True
     settings.binary_location = '/snap/bin/firefox'
-    driver = webdriver.Firefox(options=settings)
+    service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    driver = webdriver.Firefox(options=settings, service=service)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -70,7 +72,8 @@ def getPrice(page):
     settings = Options()
     settings.headless = True
     settings.binary_location = '/snap/bin/firefox'
-    driver = webdriver.Firefox(options=settings)
+    service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    driver = webdriver.Firefox(options=settings, service=service)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
