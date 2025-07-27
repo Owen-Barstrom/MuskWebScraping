@@ -38,11 +38,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install vaderSentiment selenium 
       
-      - name: Install Chrome and chromedriver, check permissions
+      - name: Install Chrome and chromedriver, set permissions
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
           sudo apt-get install -y chromium-chromedriver
+          sudo chmod +x /usr/bin/google-chrome
       
       - name: Check paths and versions
         run: |
@@ -50,7 +51,7 @@ jobs:
           google-chrome --version
           which chromedriver
           chromedriver --version
-          ls -l /usr/bin/google-chrome
+          
       - name: Scrape Data
         run: python getMuskInfo.py
       
