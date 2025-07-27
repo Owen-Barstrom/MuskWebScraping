@@ -47,8 +47,8 @@ jobs:
       
       - name: Check paths and versions
         run: |
-          which chrome
-          chrome --version
+          which google-chrome
+          google-chrome --version
           which chromedriver
           chromedriver --version
           
