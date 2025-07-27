@@ -13,6 +13,7 @@ def getTweets(page):
     #settings.binary_location = '/snap/bin/firefox'
     #service = FirefoxService(executable_path='/snap/bin/geckodriver')
     settings.add_argument("--no-sandbox")
+    settings.binary_location = 'etc/alternatives/google-chrome'
     driver = webdriver.Chrome(options=settings)
     driver.get(page)
     while ready != "complete":
