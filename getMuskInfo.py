@@ -2,17 +2,17 @@ import json
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import time
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
 
 def getTweets(page):
     ready = ""
     settings = Options()
     settings.headless = True
-    settings.binary_location = '/snap/bin/firefox'
-    service = FirefoxService(executable_path='/snap/bin/geckodriver')
-    driver = webdriver.Firefox(options=settings, service=service)
+    #settings.binary_location = '/snap/bin/firefox'
+    #service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    driver = webdriver.Chrome(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -71,9 +71,9 @@ def getPrice(page):
     ready = ""
     settings = Options()
     settings.headless = True
-    settings.binary_location = '/snap/bin/firefox'
-    service = FirefoxService(executable_path='/snap/bin/geckodriver')
-    driver = webdriver.Firefox(options=settings, service=service)
+    #settings.binary_location = '/snap/bin/firefox'
+    #service = FirefoxService(executable_path='/snap/bin/geckodriver')
+    driver = webdriver.Chrome(options=settings)
     driver.get(page)
     while ready != "complete":
         time.sleep(1)
@@ -96,3 +96,4 @@ tweets = getTweets("https://xcancel.com/elonmusk")
 sendTweetData(tweets)
 price = getPrice("https://finance.yahoo.com/quote/TSLA/")
 sendPriceData(price)
+
