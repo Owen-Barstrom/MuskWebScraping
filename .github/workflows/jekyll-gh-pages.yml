@@ -43,7 +43,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
           sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
+          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
       
       - name: Check paths and versions
         run: |
